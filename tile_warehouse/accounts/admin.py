@@ -17,16 +17,16 @@ from tiles.models import TileStackItem  # Assuming TileStackItem is in the tiles
 
 # Custom admin class for Warehouse
 class WarehouseAdmin(admin.ModelAdmin):
-    list_display = ('name', 'location', 'created_at')  # Adjust the fields as per your model
+    list_display = ('name', 'location')  # Adjust the fields as per your model
     search_fields = ('name', 'location')  # Searchable fields
-    list_filter = ('created_at',)  # Filter by creation date (if applicable)
-    ordering = ('created_at',)  # Order by most recent creation
+    list_filter = ('name','location')  # Filter by creation date (if applicable)
+    ordering = ('name',)  # Order by most recent creation
 
 # Custom admin class for Floor
 class FloorAdmin(admin.ModelAdmin):
-    list_display = ('number', 'warehouse', 'created_at')  # Adjust fields as per model
-    search_fields = ('number',)  # Searchable fields
-    list_filter = ('warehouse', 'created_at')  # Filters for warehouse and creation date
+    list_display = ('number', 'warehouse')  # Adjust fields as per model
+    search_fields = ('number','warehouse')  # Searchable fields
+    list_filter = ('warehouse', 'number')  # Filters for warehouse and creation date
 
 # Custom admin class for Tower
 class TowerAdmin(admin.ModelAdmin):

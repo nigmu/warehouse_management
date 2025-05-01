@@ -10,6 +10,7 @@ class Tower(models.Model):
     class Meta:
         unique_together = ('floor', 'tower_id')
 
+
     def __str__(self):
         return f"{self.floor} - Tower {self.tower_id}"
     
