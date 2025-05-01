@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'floor',
     'tower',
     'tiles',
+    # 'orders',
+    'customers', 
 ]
 
 MIDDLEWARE = [

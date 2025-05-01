@@ -1,0 +1,36 @@
+<!-- templates/customers/customer_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Customer List</h1>
+  <a href="{% url 'customers:add_customer' %}">Add a new customer</a>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone Number</th>
+        <th>Address</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for customer in customers %}
+        <tr>
+          <td>{{ customer.name }}</td>
+          <td>
+            {% for phone in customer.phone_numbers.all %}
+              {{ phone.number }}{% if not forloop.last %}, {% endif %}
+            {% empty %}
+              No phone numbers available.
+            {% endfor %}
+          </td>
+          <td>{{ customer.address }}</td>
+          <td>
+            <a href="{% url 'customers:edit_customer' customer.id %}">Edit</a> |
+            <a href="{% url 'customers:delete_customer' customer.id %}">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

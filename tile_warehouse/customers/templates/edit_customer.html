@@ -1,0 +1,17 @@
+<!-- templates/customers/edit_customer.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Edit Customer: {{ customer.name }}</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ customer_form.as_p }}
+    {{ phone_formset.management_form }}
+    {% for form in phone_formset %}
+      <div>
+        {{ form.as_p }}
+      </div>
+    {% endfor %}
+    <button type="submit">Save Changes</button>
+  </form>
+{% endblock %}
