@@ -30,8 +30,8 @@ urlpatterns = [
     path('floor/',     include('floor.urls',     namespace='floor')),
     path('tower/',     include('tower.urls',     namespace='tower')),
     path('tiles/',     include('tiles.urls',     namespace='tiles')),
-    # path('sales/',     include('sales.urls',     namespace='sales')),
-    path('customers/', include('customers.urls', namespace='customers')),
+    # path('orders/',     include('orders.urls',    namespace='orders')),
+    # path('customers/', include('customers.urls', namespace='customers')),
 
 ]
 
