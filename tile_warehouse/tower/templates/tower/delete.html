@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Delete Tower</h1>
+<p>Delete Tower {{ object.tower_id }} on {{ object.floor }}?</p>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Yes</button>
+  <a href="{% url 'tower:tower_list' %}">No</a>
+</form>
+{% endblock %}

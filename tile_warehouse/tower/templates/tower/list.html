@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Towers</h1>
+<a href="{% url 'tower:tower_add' %}">➕ New Tower</a>
+<table>
+  <tr><th>Floor</th><th>ID</th><th>Actions</th></tr>
+  {% for t in towers %}
+  <tr>
+    <td>{{ t.floor }}</td>
+    <td>{{ t.tower_id }}</td>
+    <td>
+      <a href="{% url 'tower:tower_edit' t.pk %}">✏️</a>
+      <a href="{% url 'tower:tower_delete' t.pk %}">🗑️</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

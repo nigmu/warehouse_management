@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+  <h1>Welcome to Tile Warehouse</h1>
+  <ul>
+    <li><a href="{% url 'warehouse:warehouse_list' %}">Manage Warehouses</a></li>
+    <li><a href="{% url 'floor:floor_list' %}">Manage Floors</a></li>
+    <li><a href="{% url 'tower:tower_list' %}">Manage Towers</a></li>
+    <li><a href="{% url 'tiles:tile_list' %}">Manage Tiles</a></li>
+  </ul>
+{% endblock %}

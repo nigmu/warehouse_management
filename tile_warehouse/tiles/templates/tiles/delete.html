@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Delete Tile</h1>
+<p>Delete tile “{{ object.tile_name }}”?</p>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Yes</button>
+  <a href="{% url 'tiles:tile_list' %}">No</a>
+</form>
+{% endblock %}

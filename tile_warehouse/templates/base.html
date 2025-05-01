@@ -1,0 +1,48 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Tile Warehouse{% endblock %}</title>
+
+    <!-- Link to the CSS files -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    {% block head %}  <!-- For any extra head content specific to a page --> 
+    {% endblock %}
+</head>
+<body>
+    <!-- Navbar or Header Section -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'warehouse:warehouse_list' %}">Manage Warehouses</a></li>
+                <li><a href="{% url 'floor:floor_list' %}">Manage Floors</a></li>
+                <li><a href="{% url 'tower:tower_list' %}">Manage Towers</a></li>
+                <li><a href="{% url 'tiles:tile_list' %}">Manage Tiles</a></li>
+              </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        {% block content %}
+        <!-- Page-specific content will be injected here -->
+        {% endblock %}
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 Tile Warehouse</p>
+    </footer>
+
+    <!-- Link to JS files -->
+    <script src="{% static 'js/script.js' %}"></script>
+
+    {% block scripts %}  <!-- For any page-specific JavaScript files --> 
+    {% endblock %}
+</body>
+</html>

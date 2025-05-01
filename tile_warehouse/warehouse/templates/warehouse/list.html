@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Warehouses</h1>
+<a href="{% url 'warehouse:warehouse_add' %}">➕ New Warehouse</a>
+<table>
+  <tr><th>Name</th><th>Location</th><th>Actions</th></tr>
+  {% for w in warehouses %}
+  <tr>
+    <td>{{ w.name }}</td>
+    <td>{{ w.location }}</td>
+    <td>
+      <a href="{% url 'warehouse:warehouse_edit' w.pk %}">✏️</a>
+      <a href="{% url 'warehouse:warehouse_delete' w.pk %}">🗑️</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

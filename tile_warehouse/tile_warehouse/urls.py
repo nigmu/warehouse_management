@@ -20,11 +20,16 @@ from django.urls import path, include
 
 from django.conf import settings
 from django.conf.urls.static import static
-from warehouse import views
+from warehouse.views import home
+
 
 urlpatterns = [
+    path('', home, name='home'),
     path('admin/', admin.site.urls),
-    path('', include('warehouse.urls')),  # if you have app URLs
+    path('warehouse/', include('warehouse.urls', namespace='warehouse')),
+    path('floor/',     include('floor.urls',     namespace='floor')),
+    path('tower/',     include('tower.urls',     namespace='tower')),
+    path('tiles/',     include('tiles.urls',     namespace='tiles')),
 ]
 
 # serve media files in development

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Floors</h1>
+<a href="{% url 'floor:floor_add' %}">➕ New Floor</a>
+<table>
+  <tr><th>Warehouse</th><th>Number</th><th>Actions</th></tr>
+  {% for f in floors %}
+  <tr>
+    <td>{{ f.warehouse.name }}</td>
+    <td>{{ f.number }}</td>
+    <td>
+      <a href="{% url 'floor:floor_edit' f.pk %}">✏️</a>
+      <a href="{% url 'floor:floor_delete' f.pk %}">🗑️</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
