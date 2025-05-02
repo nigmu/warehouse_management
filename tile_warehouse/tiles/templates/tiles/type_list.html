@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Tile Types</h2>
+<a href="{% url 'tiles:type_create' %}">+ Add New Tile Type</a>
+<ul>
+  {% for tile in types %}
+    <li>
+      <a href="{% url 'tiles:type_detail' tile.pk %}">{{ tile }}</a>
+      ( <a href="{% url 'tiles:type_update' tile.pk %}">edit</a> |
+        <a href="{% url 'tiles:type_delete' tile.pk %}">delete</a> )
+    </li>
+  {% empty %}
+    <li>No tile types found.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Tile Shipments</h2>
+<a href="{% url 'tiles:shipment_create' %}">+ Add New Shipment</a>
+<ul>
+  {% for shipment in shipments %}
+    <li>
+      <a href="{% url 'tiles:shipment_detail' shipment.pk %}">{{ shipment }}</a>
+      ( <a href="{% url 'tiles:shipment_update' shipment.pk %}">edit</a> |
+        <a href="{% url 'tiles:shipment_delete' shipment.pk %}">delete</a> )
+    </li>
+  {% empty %}
+    <li>No shipments found.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

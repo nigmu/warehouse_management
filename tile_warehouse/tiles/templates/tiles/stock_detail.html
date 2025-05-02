@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Stock Location Details</h2>
+<p><strong>Shipment:</strong> {{ location.shipment }}</p>
+<p><strong>Warehouse:</strong> {{ location.warehouse.name }}</p>
+<p><strong>Floor:</strong> {{ location.floor.number }}</p>
+<p><strong>Tower:</strong> {{ location.tower.tower_id }}</p>
+<p><strong>Quantity:</strong> {{ location.quantity }} pcs</p>
+
+<a href="{% url 'tiles:stock_update' location.pk %}">Edit</a> |
+<a href="{% url 'tiles:stock_delete' location.pk %}">Delete</a> |
+<a href="{% url 'tiles:stock_list' %}">Back to list</a>
+{% endblock %}

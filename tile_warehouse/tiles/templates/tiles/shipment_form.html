@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{% if form.instance.pk %}Edit Tile Shipment{% else %}New Tile Shipment{% endif %}</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Save and Suggest Towers</button>
+</form>
+<a href="{% url 'tiles:shipment_list' %}">Back to list</a>
+{% endblock %}

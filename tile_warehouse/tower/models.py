@@ -5,17 +5,18 @@ from django.utils import timezone
 class Tower(models.Model):
     floor = models.ForeignKey(Floor, on_delete=models.CASCADE, related_name='towers')
     tower_id = models.CharField(max_length=50)
-    created_at = models.DateField(null=True, blank=True)  # Allow the field to be manually set
+    max_capacity = models.PositiveIntegerField(default=100)
 
-    class Meta:
-        unique_together = ('floor', 'tower_id')
+    # Denormalized fields
+    warehouse = models.ForeignKey('warehouse.Warehouse', on_delete=models.CASCADE, default=1)
+
+    @property
+    def available_capacity(self):
+        max_capacity = self.max_capacity  # Replace with your actual field name
+        used_quantity = sum(loc.quantity for loc in self.tilestocklocation_set.all())
+        return max_capacity - used_quantity
 
 
-    def __str__(self):
-        return f"{self.floor} - Tower {self.tower_id}"
-    
-    
     def save(self, *args, **kwargs):
-        if not self.created_at:
-            self.created_at = timezone.now()  # You can set a default time if none is provided
+        self.warehouse = self.floor.warehouse
         super().save(*args, **kwargs)

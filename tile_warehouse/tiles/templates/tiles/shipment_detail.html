@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Shipment Details</h2>
+<p><strong>Tile Type:</strong> {{ shipment.tile_type }}</p>
+<p><strong>Production Date:</strong> {{ shipment.production_date }}</p>
+<p><strong>Arrival Date:</strong> {{ shipment.arrival_date }}</p>
+<p><strong>Total Quantity:</strong> {{ shipment.total_quantity }}</p>
+
+<h3>Stored At:</h3>
+<ul>
+  {% for loc in locations %}
+    <li>{{ loc.quantity }} pcs → {{ loc.warehouse.name }} > Floor {{ loc.floor.number }} > Tower {{ loc.tower.tower_id }}</li>
+  {% empty %}
+    <li>No stock locations assigned.</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'tiles:shipment_update' shipment.pk %}">Edit</a> |
+<a href="{% url 'tiles:shipment_delete' shipment.pk %}">Delete</a> |
+<a href="{% url 'tiles:shipment_list' %}">Back to list</a>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Tile Stock Locations</h2>
+<a href="{% url 'tiles:stock_create' %}">+ Add New Stock Location</a>
+<ul>
+  {% for loc in stock_locations %}
+    <li>
+      <a href="{% url 'tiles:stock_detail' loc.pk %}">{{ loc }}</a>
+      ( <a href="{% url 'tiles:stock_update' loc.pk %}">edit</a> |
+        <a href="{% url 'tiles:stock_delete' loc.pk %}">delete</a> )
+    </li>
+  {% empty %}
+    <li>No stock locations found.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

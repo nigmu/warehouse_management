@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{% if form.instance.pk %}Edit Stock Location{% else %}New Stock Location{% endif %}</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Save</button>
+</form>
+<a href="{% url 'tiles:Stock_list' %}">Back to list</a>
+{% endblock %}

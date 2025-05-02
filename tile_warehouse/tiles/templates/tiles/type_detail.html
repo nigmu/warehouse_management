@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Tile Type Details</h2>
+<p><strong>Name:</strong> {{ type.name }}</p>
+<p><strong>Brand:</strong> {{ type.brand }}</p>
+
+<a href="{% url 'tiles:type_update' type.pk %}">Edit</a> |
+<a href="{% url 'tiles:type_delete' type.pk %}">Delete</a> |
+<a href="{% url 'tiles:type_list' %}">Back to list</a>
+{% endblock %}
