@@ -17,8 +17,8 @@ class TileShipmentForm(forms.ModelForm):
         model = TileShipment
         fields = ['tile_type', 'production_date', 'arrival_date', 'total_quantity']
         widgets = {
-            'production_date': forms.DateInput(attrs={'type': 'date'}),
-            'arrival_date': forms.DateInput(attrs={'type': 'date'}),
+            'production_date': forms.DateInput(format='%d/%m/%Y', attrs={'type': 'date'}),
+            'arrival_date': forms.DateInput(format='%d/%m/%Y', attrs={'type': 'date'}),
             'total_quantity': forms.NumberInput(attrs={'min': '1'}),
         }
 

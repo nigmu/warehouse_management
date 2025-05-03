@@ -146,3 +146,14 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 
 AUTH_USER_MODEL = 'accounts.User'
+
+
+# Date format fix for dd/mm/yyyy
+
+USE_L10N = False  # Disable locale-based formatting
+DATE_FORMAT = 'd/m/Y'  # Template display format
+DATETIME_FORMAT = 'd/m/Y H:i'  # Optional: for datetime fields
+
+# For form input parsing
+DATE_INPUT_FORMATS = ['%d/%m/%Y']
+DATETIME_INPUT_FORMATS = ['%d/%m/%Y %H:%M']
