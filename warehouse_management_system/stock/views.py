@@ -1,3 +1,8 @@
 from django.shortcuts import render
+from rest_framework import viewsets
+from .models import Stack
+from .serializers import StackSerializer
 
-# Create your views here.
+class StackViewSet(viewsets.ModelViewSet):
+    queryset = Stack.objects.all()
+    serializer_class = StackSerializer
