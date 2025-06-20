@@ -1,0 +1,68 @@
+<!-- stock.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stock Management</title>
+  <meta name="csrf-token" content="{{ csrf_token }}">
+</head>
+<body>
+  <h2>Stock</h2>
+
+  <form id="createStockForm">
+    <input type="number" id="warehouse" placeholder="Warehouse ID" required>
+    <input type="number" id="block" placeholder="Block ID" required>
+    <input type="number" id="tile" placeholder="Tile ID" required>
+    <input type="number" id="quantity" placeholder="Quantity" required>
+    <input type="date" id="manufacturing_date">
+    <input type="date" id="shipment_arrival_date">
+    <button type="submit">Add Stock</button>
+  </form>
+
+  <ul id="stockList"></ul>
+
+  <script>
+    function getCSRFToken() {
+      return document.querySelector('[name=csrf-token]').content;
+    }
+
+    const form = document.getElementById('createStockForm');
+    const list = document.getElementById('stockList');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const stock = {
+        warehouse: document.getElementById('warehouse').value,
+        block: document.getElementById('block').value,
+        tile: document.getElementById('tile').value,
+        quantity: document.getElementById('quantity').value,
+        manufacturing_date: document.getElementById('manufacturing_date').value || null,
+        shipment_arrival_date: document.getElementById('shipment_arrival_date').value || null
+      };
+
+      await fetch('/api/stack/stacks/', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCSRFToken()
+        },
+        body: JSON.stringify(stock)
+      });
+
+      loadStocks();
+    });
+
+    async function loadStocks() {
+      list.innerHTML = '';
+      const res = await fetch('/api/stack/stacks/');
+      const data = await res.json();
+      data.forEach(s => {
+        const li = document.createElement('li');
+        li.textContent = `Tile ${s.tile} | Block ${s.block} | Qty ${s.quantity}`;
+        list.appendChild(li);
+      });
+    }
+
+    loadStocks();
+  </script>
+</body>
+</html>

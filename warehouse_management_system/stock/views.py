@@ -6,3 +6,6 @@ from .serializers import StackSerializer
 class StackViewSet(viewsets.ModelViewSet):
     queryset = Stack.objects.all()
     serializer_class = StackSerializer
+
+def stack_page(request):
+    return render(request, 'stock/stock_page.html')

@@ -16,10 +16,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from warehouse.views import warehouse_page, block_page, index
+from tile.views import tile_page
+from stock.views import stack_page
 
 urlpatterns = [
+
+    #  Default API routes
     path('admin/', admin.site.urls),
     path('api/warehouse/', include('warehouse.urls')),
     path('api/tile/', include('tile.urls')),
     path('api/stack/', include('stock.urls')),
+
+    #  Frontend routes
+    path('', index, name='home'),
+    path('warehouse/', warehouse_page, name = 'warehouse_page'),
+    path('block/', block_page, name='block_page'),
+    path('tile/', tile_page, name='tile_page'),
+    path('stock/', stack_page, name='stock_page')
+
+
 ]

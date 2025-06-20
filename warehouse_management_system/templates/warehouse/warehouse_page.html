@@ -1,0 +1,60 @@
+<!-- warehouse.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Warehouse Management</title>
+  <meta name="csrf-token" content="{{ csrf_token }}">
+
+</head>
+<body>
+  <h2>Warehouse</h2>
+
+  <form id="createWarehouseForm" method="POST">
+    <input type="text" id="warehouse_name" placeholder="Warehouse Name" required>
+    <input type="text" id="warehouse_location" placeholder="Location" required>
+    <button type="submit">Add Warehouse</button>
+  </form>
+
+  <ul id="warehouseList"></ul>
+
+  <script>
+    function getCSRFToken() {
+      return document.querySelector('[name=csrf-token]').content;
+    }
+
+
+    const form = document.getElementById('createWarehouseForm');
+    const list = document.getElementById('warehouseList');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('warehouse_name').value;
+      const location = document.getElementById('warehouse_location').value;
+
+      await fetch('/api/warehouse/warehouses/', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCSRFToken()
+        },
+        body: JSON.stringify({ warehouse_name: name, warehouse_location: location })
+      });
+
+      loadWarehouses();
+    });
+
+    async function loadWarehouses() {
+      list.innerHTML = '';
+      const res = await fetch('/api/warehouse/warehouses/');
+      const data = await res.json();
+      data.forEach(wh => {
+        const li = document.createElement('li');
+        li.textContent = `${wh.warehouse_name} (${wh.warehouse_location})`;
+        list.appendChild(li);
+      });
+    }
+
+    loadWarehouses();
+  </script>
+</body>
+</html>

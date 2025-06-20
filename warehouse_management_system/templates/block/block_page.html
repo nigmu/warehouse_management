@@ -1,0 +1,58 @@
+<!-- block.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Block Management</title>
+  <meta name="csrf-token" content="{{ csrf_token }}">
+</head>
+<body>
+  <h2>Block</h2>
+
+  <form id="createBlockForm">
+    <input type="text" id="block_name" placeholder="Block Name" required>
+    <input type="number" id="warehouse_id" placeholder="Warehouse ID" required>
+    <button type="submit">Add Block</button>
+  </form>
+
+  <ul id="blockList"></ul>
+
+  <script>
+    function getCSRFToken() {
+      return document.querySelector('[name=csrf-token]').content;
+    }
+
+    const form = document.getElementById('createBlockForm');
+    const list = document.getElementById('blockList');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const block = document.getElementById('block_name').value;
+      const warehouse = document.getElementById('warehouse_id').value;
+
+      await fetch('/api/warehouse/blocks/', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCSRFToken()
+        },
+        body: JSON.stringify({ block_name: block, warehouse: warehouse })
+      });
+
+      loadBlocks();
+    });
+
+    async function loadBlocks() {
+      list.innerHTML = '';
+      const res = await fetch('/api/warehouse/blocks/');
+      const data = await res.json();
+      data.forEach(bl => {
+        const li = document.createElement('li');
+        li.textContent = `${bl.block_name} (Warehouse ID: ${bl.warehouse})`;
+        list.appendChild(li);
+      });
+    }
+
+    loadBlocks();
+  </script>
+</body>
+</html>

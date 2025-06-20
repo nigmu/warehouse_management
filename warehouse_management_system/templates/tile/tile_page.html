@@ -1,0 +1,64 @@
+<!-- tile.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tile Management</title>
+  <meta name="csrf-token" content="{{ csrf_token }}">
+</head>
+<body>
+  <h2>Tile</h2>
+
+  <form id="createTileForm">
+    <input type="text" id="tile_name" placeholder="Tile Name" required>
+    <input type="text" id="brand" placeholder="Brand" required>
+    <input type="text" id="size" placeholder="Size" required>
+    <input type="text" id="description" placeholder="Description">
+    <button type="submit">Add Tile</button>
+  </form>
+
+  <ul id="tileList"></ul>
+
+  <script>
+    function getCSRFToken() {
+      return document.querySelector('[name=csrf-token]').content;
+    }
+    
+    const form = document.getElementById('createTileForm');
+    const list = document.getElementById('tileList');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const tile = {
+        tile_name: document.getElementById('tile_name').value,
+        brand: document.getElementById('brand').value,
+        size: document.getElementById('size').value,
+        description: document.getElementById('description').value
+      };
+
+      await fetch('/api/tile/tiles/', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCSRFToken()
+        },
+        body: JSON.stringify(tile)
+      });
+
+      loadTiles();
+    });
+
+    async function loadTiles() {
+      list.innerHTML = '';
+      const res = await fetch('/api/tile/tiles/');
+      const data = await res.json();
+      data.forEach(t => {
+        const li = document.createElement('li');
+        li.textContent = `${t.tile_name} (${t.brand}, ${t.size})`;
+        list.appendChild(li);
+      });
+    }
+
+    loadTiles();
+  </script>
+</body>
+</html>

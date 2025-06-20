@@ -6,3 +6,6 @@ from .serializers import TileSerializer
 class TileViewSet(viewsets.ModelViewSet):
     queryset = Tile.objects.all()
     serializer_class = TileSerializer
+
+def tile_page(request):
+    return render(request, 'tile/tile_page.html')
