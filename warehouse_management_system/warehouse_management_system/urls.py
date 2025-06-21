@@ -35,5 +35,7 @@ urlpatterns = [
     path('tile/', tile_page, name='tile_page'),
     path('stock/', stack_page, name='stock_page')
 
+    # Search stock by tile name and tile size
+    
 
 ]

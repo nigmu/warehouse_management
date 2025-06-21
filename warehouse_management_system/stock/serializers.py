@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Stack
 
+
 class StackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Stack
@@ -24,3 +25,12 @@ class StackSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Tile must be selected.")
 
         return data
+
+
+# Serializer for searching stock by tile name, tile size, warehouse, block, and quantity
+class StockSearchSerializer(serializers.Serializer):
+    tile_name = serializers.CharField(source='tile.tile_name')
+    size = serializers.CharField(source='tile.size')
+    warehouse = serializers.CharField(source='block.warehouse.warehouse_name')
+    block = serializers.CharField(source='block.block_name')
+    quantity = serializers.IntegerField()

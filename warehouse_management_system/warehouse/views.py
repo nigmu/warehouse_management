@@ -18,6 +18,7 @@ def warehouse_page(request):
 class BlockViewSet(viewsets.ModelViewSet):
     queryset = Block.objects.all()
     serializer_class = BlockSerializer
+    
 
 def block_page(request):
     return render(request, 'block/block_page.html')

@@ -12,5 +12,3 @@ class Stack(models.Model):
 
     def __str__(self):
         return f"Stack {self.tile.tile_name} is in Block {self.block.block_name} of Warehouse {self.warehouse.warehouse_name} with {self.quantity} boxes"
-    
-    # 
